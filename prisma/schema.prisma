@@ -20,6 +20,6 @@ model Board {
   imageUserName String @db.Text
   imageLinkHTML String @db.Text
 
-  createAt DateTime @default(now())
-  updateAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
