@@ -25,26 +25,35 @@ export const FormPicker = ({ id, errors }: FormPickerProps) => {
   const [isLoading, setIsLoading] = useState(true);
   const [selectedImageId, setSelectedImageId] = useState(null);
 
+  // TODO: Uncomment this when wanting to use a proper Unsplash API
+  // useEffect(() => {
+  //   const fetchImages = async () => {
+  //     try {
+  //       const result = await unsplash.photos.getRandom({
+  //         collectionIds: ["317099"],
+  //         count: 9,
+  //       });
+
+  //       if (result && result.response) {
+  //         const newImages = result.response as Array<Record<string, any>>;
+  //         setImages(newImages);
+  //       } else {
+  //         console.error("Failed to get images from Unsplash");
+  //       }
+  //     } catch (error) {
+  //       console.log(error);
+  //       setImages(defaultImages);
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   };
+
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        throw new Error(
-          "Going to throw an error here until app is finished so I don't use up remaining Unsplash API calls",
-        );
-        const result = await unsplash.photos.getRandom({
-          collectionIds: ["317099"],
-          count: 9,
-        });
-
-        if (result && result.response) {
-          const newImages = result.response as Array<Record<string, any>>;
-          setImages(newImages);
-        } else {
-          console.error("Failed to get images from Unsplash");
-        }
+        setImages(defaultImages);
       } catch (error) {
         console.log(error);
-        setImages(defaultImages);
       } finally {
         setIsLoading(false);
       }
@@ -82,6 +91,7 @@ export const FormPicker = ({ id, errors }: FormPickerProps) => {
               name={id}
               className="hidden"
               checked={selectedImageId === image.id}
+              readOnly
               disabled={pending}
               value={`${image.id}|${image.urls.thumb}|${image.urls.full}|${image.links.html}|${image.user.name}`}
             />
