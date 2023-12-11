@@ -1,4 +1,4 @@
-[I am following this tutorial.](https://youtu.be/pRybm9lXW2c?si=f5ATo7WfeTQt1rSK&t=42444)
+_This app doesn't work well on mobile devices_
 
 Key Features:
 
