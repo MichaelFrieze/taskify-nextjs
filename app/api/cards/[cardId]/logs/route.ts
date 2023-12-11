@@ -6,7 +6,7 @@ import { db } from "@/lib/db";
 
 export async function GET(
   request: Request,
-  { params }: { params: { cardId: string } }
+  { params }: { params: { cardId: string } },
 ) {
   try {
     const { userId, orgId } = auth();
@@ -31,4 +31,4 @@ export async function GET(
   } catch (error) {
     return new NextResponse("Internal Error", { status: 500 });
   }
-};
+}

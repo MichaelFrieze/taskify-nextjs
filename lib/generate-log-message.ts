@@ -12,5 +12,5 @@ export const generateLogMessage = (log: AuditLog) => {
       return `deleted ${entityType.toLowerCase()} "${entityTitle}"`;
     default:
       return `unknown action ${entityType.toLowerCase()} "${entityTitle}"`;
-  };
+  }
 };
