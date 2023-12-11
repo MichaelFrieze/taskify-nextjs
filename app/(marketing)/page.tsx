@@ -26,7 +26,7 @@ const MarketingPage = () => {
       >
         <div className="mb-4 flex items-center rounded-full border bg-amber-100 p-4 uppercase text-amber-700 shadow-sm">
           <Medal className="mr-2 h-6 w-6" />
-          <div className="pt-1">No 1 task managment</div>
+          No 1 task managment
         </div>
         <h1 className="mb-6 text-center text-3xl text-neutral-800 md:text-6xl">
           Taskify helps team move
