@@ -30,6 +30,8 @@ export const BoardList = async () => {
   const availableCount = await getAvailableCount();
   const isPro = await checkSubscription();
 
+  await new Promise((resolve) => setTimeout(resolve, 5000));
+
   return (
     <div className="space-y-4">
       <div className="flex items-center text-lg font-semibold text-neutral-700">
