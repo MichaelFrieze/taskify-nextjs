@@ -30,10 +30,6 @@ export const BoardList = async () => {
   const availableCount = await getAvailableCount();
   const isPro = await checkSubscription();
 
-  const testingSkeleton = await new Promise((resolve) =>
-    setTimeout(resolve, 1000),
-  );
-
   return (
     <div className="space-y-4">
       <div className="flex items-center text-lg font-semibold text-neutral-700">
@@ -78,7 +74,7 @@ export const BoardList = async () => {
   );
 };
 
-BoardList.Skeleton = function SkeletonBoardList() {
+export const BoardListSkeleton = () => {
   return (
     <div className="gird-cols-2 grid gap-4 sm:grid-cols-3 lg:grid-cols-4">
       <Skeleton className="aspect-video h-full w-full p-2" />
@@ -92,3 +88,6 @@ BoardList.Skeleton = function SkeletonBoardList() {
     </div>
   );
 };
+
+// Add this to the top of BoardList to test the loading state
+// await new Promise((resolve) => setTimeout(resolve, 5000));

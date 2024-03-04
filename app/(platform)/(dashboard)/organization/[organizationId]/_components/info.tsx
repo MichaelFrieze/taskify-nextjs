@@ -14,7 +14,7 @@ export const Info = ({ isPro }: InfoProps) => {
   const { organization, isLoaded } = useOrganization();
 
   if (!isLoaded) {
-    return <Info.Skeleton />;
+    return <SkeletonInfo />;
   }
 
   return (
@@ -38,7 +38,7 @@ export const Info = ({ isPro }: InfoProps) => {
   );
 };
 
-Info.Skeleton = function SkeletonInfo() {
+export const SkeletonInfo = () => {
   return (
     <div className="flex items-center gap-x-4">
       <div className="relative h-[60px] w-[60px]">
