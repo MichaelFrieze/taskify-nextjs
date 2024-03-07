@@ -1,21 +1,13 @@
-"use client";
-
 import Image from "next/image";
+import { checkSubscription } from "@/lib/subscription";
+import { getOrg } from "@/lib/get-org";
 import { CreditCard } from "lucide-react";
-import { useOrganization } from "@clerk/nextjs";
 
 import { Skeleton } from "@/components/ui/skeleton";
 
-interface InfoProps {
-  isPro: boolean;
-}
-
-export const Info = ({ isPro }: InfoProps) => {
-  const { organization, isLoaded } = useOrganization();
-
-  if (!isLoaded) {
-    return <SkeletonInfo />;
-  }
+export const Info = async () => {
+  const isPro = await checkSubscription();
+  const organization = await getOrg();
 
   return (
     <div className="flex items-center gap-x-4">
