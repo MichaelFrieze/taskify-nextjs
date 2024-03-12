@@ -47,19 +47,36 @@ export const BoardList = async () => {
             <p className="relative font-semibold text-white">{board.title}</p>
           </Link>
         ))}
-        <FormPopover sideOffset={10} side="right">
-          <div
-            role="button"
-            className="relative flex aspect-video h-full w-full flex-col items-center justify-center gap-y-1 rounded-sm bg-muted transition hover:opacity-75"
-          >
-            <p className="text-sm">Create new board</p>
-            <span className="text-xs">
-              {isPro
-                ? "Unlimited"
-                : `${MAX_FREE_BOARDS - availableCount} remaining`}
-            </span>
-          </div>
-        </FormPopover>
+        <div className="md:hidden">
+          <FormPopover sideOffset={10}>
+            <div
+              role="button"
+              className="relative flex aspect-video h-full w-full flex-col items-center justify-center gap-y-1 rounded-sm bg-muted transition hover:opacity-75"
+            >
+              <p className="text-sm">Create new board</p>
+              <span className="text-xs">
+                {isPro
+                  ? "Unlimited"
+                  : `${MAX_FREE_BOARDS - availableCount} remaining`}
+              </span>
+            </div>
+          </FormPopover>
+        </div>
+        <div className="hidden md:block">
+          <FormPopover sideOffset={10} side="right">
+            <div
+              role="button"
+              className="relative flex aspect-video h-full w-full flex-col items-center justify-center gap-y-1 rounded-sm bg-muted transition hover:opacity-75"
+            >
+              <p className="text-sm">Create new board</p>
+              <span className="text-xs">
+                {isPro
+                  ? "Unlimited"
+                  : `${MAX_FREE_BOARDS - availableCount} remaining`}
+              </span>
+            </div>
+          </FormPopover>
+        </div>
       </div>
     </div>
   );
