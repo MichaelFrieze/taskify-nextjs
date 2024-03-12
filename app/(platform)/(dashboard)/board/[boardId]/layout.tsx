@@ -1,3 +1,4 @@
+import { upperCase } from "lodash";
 import { auth } from "@clerk/nextjs";
 import { notFound, redirect } from "next/navigation";
 
@@ -26,7 +27,7 @@ export async function generateMetadata({
   });
 
   return {
-    title: board?.title || "Board",
+    title: upperCase(board?.title || "Board"),
   };
 }
 

@@ -1,4 +1,4 @@
-import { startCase } from "lodash";
+import { upperCase } from "lodash";
 import { auth } from "@clerk/nextjs";
 
 import { OrgControl } from "./_components/org-control";
@@ -7,7 +7,7 @@ export async function generateMetadata() {
   const { orgSlug } = auth();
 
   return {
-    title: startCase(orgSlug || "organization"),
+    title: upperCase(orgSlug || "organization"),
   };
 }
 
