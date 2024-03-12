@@ -116,7 +116,7 @@ export const Description = ({ data }: DescriptionProps) => {
   );
 };
 
-Description.Skeleton = function DescriptionSkeleton() {
+export const DescriptionSkeleton = () => {
   return (
     <div className="flex w-full items-start gap-x-3">
       <Skeleton className="h-6 w-6 bg-neutral-200" />

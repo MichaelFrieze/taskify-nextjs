@@ -82,7 +82,7 @@ export const Header = ({ data }: HeaderProps) => {
   );
 };
 
-Header.Skeleton = function HeaderSkeleton() {
+export const HeaderSkeleton = () => {
   return (
     <div className="mb-6 flex items-start gap-x-3">
       <Skeleton className="mt-1 h-6 w-6 bg-neutral-200" />

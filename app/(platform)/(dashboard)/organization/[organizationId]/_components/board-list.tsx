@@ -79,6 +79,3 @@ export const BoardListSkeleton = () => {
     </div>
   );
 };
-
-// Add this to the top of BoardList to test the loading state
-// await new Promise((resolve) => setTimeout(resolve, 5000));
