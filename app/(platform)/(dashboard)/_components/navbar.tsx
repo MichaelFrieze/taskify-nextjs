@@ -1,11 +1,17 @@
 import { Plus } from "lucide-react";
-import { OrganizationSwitcher, UserButton } from "@clerk/nextjs";
+import {
+  ClerkLoaded,
+  ClerkLoading,
+  OrganizationSwitcher,
+  UserButton,
+} from "@clerk/nextjs";
 
 import { Logo } from "@/components/logo";
 import { Button } from "@/components/ui/button";
 import { FormPopover } from "@/components/form/form-popover";
 
 import { MobileSidebar } from "./mobile-sidebar";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export const Navbar = () => {
   return (
@@ -35,32 +41,40 @@ export const Navbar = () => {
         </FormPopover>
       </div>
       <div className="ml-auto flex items-center gap-x-2">
-        <OrganizationSwitcher
-          hidePersonal
-          afterCreateOrganizationUrl="/organization/:id"
-          afterLeaveOrganizationUrl="/select-org"
-          afterSelectOrganizationUrl="/organization/:id"
-          appearance={{
-            elements: {
-              rootBox: {
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
+        <ClerkLoading>
+          <div className="flex w-[175px] items-center justify-between">
+            <Skeleton className="h-8 w-[78%]" />
+            <Skeleton className="h-8 w-8 rounded-full" />
+          </div>
+        </ClerkLoading>
+        <ClerkLoaded>
+          <OrganizationSwitcher
+            hidePersonal
+            afterCreateOrganizationUrl="/organization/:id"
+            afterLeaveOrganizationUrl="/select-org"
+            afterSelectOrganizationUrl="/organization/:id"
+            appearance={{
+              elements: {
+                rootBox: {
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                },
               },
-            },
-          }}
-        />
-        <UserButton
-          afterSignOutUrl="/"
-          appearance={{
-            elements: {
-              avatarBox: {
-                height: 30,
-                width: 30,
+            }}
+          />
+          <UserButton
+            afterSignOutUrl="/"
+            appearance={{
+              elements: {
+                avatarBox: {
+                  height: 30,
+                  width: 30,
+                },
               },
-            },
-          }}
-        />
+            }}
+          />
+        </ClerkLoaded>
       </div>
     </nav>
   );

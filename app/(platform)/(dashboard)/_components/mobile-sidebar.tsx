@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 
 import { Sidebar } from "./sidebar";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export const MobileSidebar = () => {
   const pathname = usePathname();
@@ -27,7 +28,7 @@ export const MobileSidebar = () => {
   }, [pathname, onClose]);
 
   if (!isMounted) {
-    return null;
+    return <Skeleton className="mr-2 h-10 w-10 md:hidden" />;
   }
 
   return (
