@@ -24,7 +24,7 @@ export const Actions = ({ data }: ActionsProps) => {
     copyCard,
     {
       onSuccess: (data) => {
-        toast.success(`Card "${data.title}" copied`);
+        // toast.success(`Card "${data.title}" copied`);
         cardModal.onClose();
       },
       onError: (error) => {
@@ -37,7 +37,7 @@ export const Actions = ({ data }: ActionsProps) => {
     deleteCard,
     {
       onSuccess: (data) => {
-        toast.success(`Card "${data.title}" deleted`);
+        // toast.success(`Card "${data.title}" deleted`);
         cardModal.onClose();
       },
       onError: (error) => {
