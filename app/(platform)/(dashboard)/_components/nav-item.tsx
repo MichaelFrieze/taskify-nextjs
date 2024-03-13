@@ -40,7 +40,7 @@ export const NavItem = ({
     {
       label: "Boards",
       icon: <Layout className="mr-2 h-4 w-4" />,
-      href: `/organization/${organization.id}`,
+      href: `/organization/${organization.id}/boards`,
     },
     {
       label: "Activity",

@@ -11,7 +11,7 @@ export default authMiddleware({
       let path = "/select-org";
 
       if (auth.orgId) {
-        path = `/organization/${auth.orgId}`;
+        path = `/organization/${auth.orgId}/boards`;
       }
 
       const orgSelection = new URL(path, req.url);

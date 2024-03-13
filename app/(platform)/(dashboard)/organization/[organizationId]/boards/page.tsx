@@ -1,9 +1,8 @@
 import { Separator } from "@/components/ui/separator";
-
-import { Info } from "./_components/info";
+import { Info } from "../_components/info";
 import { BoardList } from "./_components/board-list";
 
-const OrganizationIdPage = async () => {
+const BoardsPage = async () => {
   return (
     <div className="mb-20 w-full">
       <Info />
@@ -15,4 +14,4 @@ const OrganizationIdPage = async () => {
   );
 };
 
-export default OrganizationIdPage;
+export default BoardsPage;
