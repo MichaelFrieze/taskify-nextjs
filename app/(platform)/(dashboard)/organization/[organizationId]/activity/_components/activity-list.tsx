@@ -4,8 +4,10 @@ import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
 import { ActivityItem } from "@/components/activity-item";
 import { Skeleton } from "@/components/ui/skeleton";
+import { unstable_noStore as noStore } from "next/cache";
 
 export const ActivityList = async () => {
+  noStore();
   const { orgId } = auth();
 
   if (!orgId) {
