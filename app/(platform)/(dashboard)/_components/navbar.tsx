@@ -50,9 +50,9 @@ export const Navbar = () => {
         <ClerkLoaded>
           <OrganizationSwitcher
             hidePersonal
-            afterCreateOrganizationUrl="/organization/:id"
+            afterCreateOrganizationUrl="/organization/:id/boards"
             afterLeaveOrganizationUrl="/select-org"
-            afterSelectOrganizationUrl="/organization/:id"
+            afterSelectOrganizationUrl="/organization/:id/boards"
             appearance={{
               elements: {
                 rootBox: {
