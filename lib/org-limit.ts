@@ -1,5 +1,8 @@
+import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs";
 
+import { getOrgById } from "./get-org-by-id";
+import { getOrgLimit } from "./get-org-limit";
 import { db } from "@/lib/db";
 import { MAX_FREE_BOARDS } from "@/constants/boards";
 
@@ -10,9 +13,7 @@ export const incrementAvailableCount = async () => {
     throw new Error("Unauthorized");
   }
 
-  const orgLimit = await db.orgLimit.findUnique({
-    where: { orgId },
-  });
+  const orgLimit = await getOrgLimit(orgId);
 
   if (orgLimit) {
     await db.orgLimit.update({
@@ -33,9 +34,7 @@ export const decreaseAvailableCount = async () => {
     throw new Error("Unauthorized");
   }
 
-  const orgLimit = await db.orgLimit.findUnique({
-    where: { orgId },
-  });
+  const orgLimit = await getOrgLimit(orgId);
 
   if (orgLimit) {
     await db.orgLimit.update({
@@ -56,9 +55,7 @@ export const hasAvailableCount = async () => {
     throw new Error("Unauthorized");
   }
 
-  const orgLimit = await db.orgLimit.findUnique({
-    where: { orgId },
-  });
+  const orgLimit = await getOrgLimit(orgId);
 
   if (!orgLimit || orgLimit.count < MAX_FREE_BOARDS) {
     return true;
@@ -67,20 +64,34 @@ export const hasAvailableCount = async () => {
   }
 };
 
-export const getAvailableCount = async () => {
-  const { orgId } = auth();
+export const getAvailableCount = async (paramsOrgId?: string) => {
+  if (paramsOrgId) {
+    const org = await getOrgById(paramsOrgId);
 
-  if (!orgId) {
-    return 0;
+    if (!org) {
+      redirect("/select-org");
+    }
+
+    const orgLimit = await getOrgLimit(org.id);
+
+    if (!orgLimit) {
+      return 0;
+    }
+
+    return orgLimit.count;
+  } else {
+    const { orgId } = auth();
+
+    if (!orgId) {
+      return 0;
+    }
+
+    const orgLimit = await getOrgLimit(orgId);
+
+    if (!orgLimit) {
+      return 0;
+    }
+
+    return orgLimit.count;
   }
-
-  const orgLimit = await db.orgLimit.findUnique({
-    where: { orgId },
-  });
-
-  if (!orgLimit) {
-    return 0;
-  }
-
-  return orgLimit.count;
 };

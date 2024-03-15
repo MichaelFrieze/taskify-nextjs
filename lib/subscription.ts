@@ -1,27 +1,31 @@
+import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs";
 
-import { db } from "@/lib/db";
+import { getOrgById } from "./get-org-by-id";
+import { getOrgSubscription } from "./get-org-subscription";
 
 const DAY_IN_MS = 86_400_000;
 
-export const checkSubscription = async () => {
-  const { orgId } = auth();
+export const checkSubscription = async (paramsOrgId?: string) => {
+  let orgSubscription;
 
-  if (!orgId) {
-    return false;
+  if (paramsOrgId) {
+    const org = await getOrgById(paramsOrgId);
+
+    if (!org) {
+      redirect("/select-org");
+    }
+
+    orgSubscription = await getOrgSubscription(org.id);
+  } else {
+    const { orgId } = auth();
+
+    if (!orgId) {
+      return false;
+    }
+
+    orgSubscription = await getOrgSubscription(orgId);
   }
-
-  const orgSubscription = await db.orgSubscription.findUnique({
-    where: {
-      orgId,
-    },
-    select: {
-      stripeSubscriptionId: true,
-      stripeCurrentPeriodEnd: true,
-      stripeCustomerId: true,
-      stripePriceId: true,
-    },
-  });
 
   if (!orgSubscription) {
     return false;
