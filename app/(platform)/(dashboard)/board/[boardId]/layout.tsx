@@ -2,7 +2,7 @@ import { upperCase } from "lodash";
 import { auth } from "@clerk/nextjs";
 import { notFound, redirect } from "next/navigation";
 
-import { db } from "@/lib/db";
+import { getBoard } from "@/lib/get-board";
 
 import { BoardNavbar } from "./_components/board-navbar";
 
@@ -19,12 +19,7 @@ export async function generateMetadata({
     };
   }
 
-  const board = await db.board.findUnique({
-    where: {
-      id: params.boardId,
-      orgId,
-    },
-  });
+  const board = await getBoard(params.boardId, orgId);
 
   return {
     title: upperCase(board?.title || "Board"),
@@ -44,12 +39,7 @@ const BoardIdLayout = async ({
     redirect("/select-org");
   }
 
-  const board = await db.board.findUnique({
-    where: {
-      id: params.boardId,
-      orgId,
-    },
-  });
+  const board = await getBoard(params.boardId, orgId);
 
   if (!board) {
     notFound();

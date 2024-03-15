@@ -1,6 +1,6 @@
 import { clerkClient, auth } from "@clerk/nextjs";
 
-export const getOrg = async () => {
+export const getActiveOrg = async () => {
   const { orgId } = auth();
 
   if (!orgId) {

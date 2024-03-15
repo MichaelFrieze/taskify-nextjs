@@ -1,4 +1,4 @@
-_This app is a slightly modified version of CodeWithAntonio's [Trello Clone](https://github.com/AntonioErdeljac/next13-trello)._
+_This app is a modified version of CodeWithAntonio's [Trello Clone](https://github.com/AntonioErdeljac/next13-trello)._
 
 Key Features:
 

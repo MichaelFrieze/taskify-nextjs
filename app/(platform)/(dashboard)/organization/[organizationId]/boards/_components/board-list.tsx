@@ -1,33 +1,24 @@
 import Link from "next/link";
-import { auth } from "@clerk/nextjs";
-import { redirect } from "next/navigation";
 import { User2 } from "lucide-react";
 
-import { db } from "@/lib/db";
-import { Skeleton } from "@/components/ui/skeleton";
-import { FormPopover } from "@/components/form/form-popover";
+import { getBoards } from "@/lib/get-boards";
 import { MAX_FREE_BOARDS } from "@/constants/boards";
-import { getAvailableCount } from "@/lib/org-limit";
-import { checkSubscription } from "@/lib/subscription";
 
-export const BoardList = async () => {
-  const { orgId } = auth();
+import { FormPopover } from "@/components/form/form-popover";
+import { Skeleton } from "@/components/ui/skeleton";
 
-  if (!orgId) {
-    return redirect("/select-org");
-  }
+interface BoardListProps {
+  orgId: string;
+  availableCount: number;
+  isPro: boolean;
+}
 
-  const boards = await db.board.findMany({
-    where: {
-      orgId,
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
-
-  const availableCount = await getAvailableCount();
-  const isPro = await checkSubscription();
+export const BoardList = async ({
+  orgId,
+  availableCount,
+  isPro,
+}: BoardListProps) => {
+  const boards = await getBoards(orgId);
 
   return (
     <div className="space-y-4">
@@ -39,7 +30,7 @@ export const BoardList = async () => {
         {boards.map((board) => (
           <Link
             key={board.id}
-            href={`/board/${board.id}`}
+            href={`/board/${board.id}?orgId=${orgId}`}
             className="group relative aspect-video h-full w-full overflow-hidden rounded-sm bg-sky-700 bg-cover bg-center bg-no-repeat p-2"
             style={{ backgroundImage: `url(${board.imageThumbUrl})` }}
           >

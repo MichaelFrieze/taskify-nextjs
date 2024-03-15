@@ -1,27 +1,10 @@
-import { auth } from "@clerk/nextjs";
-import { redirect } from "next/navigation";
+import { getAuditLogs } from "@/lib/get-audit-logs";
 
-import { db } from "@/lib/db";
 import { ActivityItem } from "@/components/activity-item";
 import { Skeleton } from "@/components/ui/skeleton";
-import { unstable_noStore as noStore } from "next/cache";
 
-export const ActivityList = async () => {
-  noStore();
-  const { orgId } = auth();
-
-  if (!orgId) {
-    redirect("/select-org");
-  }
-
-  const auditLogs = await db.auditLog.findMany({
-    where: {
-      orgId,
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
+export const ActivityList = async ({ orgId }: { orgId: string }) => {
+  const auditLogs = await getAuditLogs(orgId);
 
   return (
     <ol className="mt-4 space-y-4">
