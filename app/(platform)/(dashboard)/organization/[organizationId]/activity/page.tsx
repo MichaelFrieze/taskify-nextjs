@@ -4,8 +4,12 @@ import { getOrgById } from "@/lib/get-org-by-id";
 import { checkSubscription } from "@/lib/subscription";
 
 import { Info } from "../_components/info";
-import { ActivityList } from "./_components/activity-list";
+import {
+  ActivityList,
+  ActivityListSkeleton,
+} from "./_components/activity-list";
 import { Separator } from "@/components/ui/separator";
+import { Suspense } from "react";
 
 const ActivityPage = async ({
   params,
@@ -24,7 +28,9 @@ const ActivityPage = async ({
     <div className="w-full">
       <Info org={org} isPro={isPro} />
       <Separator className="my-2" />
-      <ActivityList orgId={org.id} />
+      <Suspense fallback={<ActivityListSkeleton />}>
+        <ActivityList orgId={org.id} />
+      </Suspense>
     </div>
   );
 };
