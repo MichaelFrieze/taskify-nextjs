@@ -27,7 +27,7 @@ const ActivityPage = async ({
   return (
     <div className="w-full">
       <Info org={org} isPro={isPro} />
-      <Separator className="my-2" />
+      <Separator className="my-4" />
       <Suspense fallback={<ActivityListSkeleton />}>
         <ActivityList orgId={org.id} />
       </Suspense>
