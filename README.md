@@ -1,28 +1,3 @@
-_This app is a modified version of CodeWithAntonio's [Trello Clone](https://github.com/AntonioErdeljac/next13-trello)._
-
-Key Features:
-
-- Auth using Clerk
-- Organizations / Workspaces using Clerk
-- Board creation
-- Unsplash API for random cover images
-- Activity log for entire organization
-- Board rename and delete
-- List creation
-- List rename, delete, drag & drop reorder and copy
-- Card creation
-- Card description, rename, delete, drag & drop reorder and copy
-- Card activity log
-- Board limit for every organization
-- Stripe subscription for each organization to unlock unlimited boards
-- Landing page
-- PostgreSQL on Railway
-- Prisma
-- shadcnUI & TailwindCSS
-- Deployment on Vercel
-
----
-
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
